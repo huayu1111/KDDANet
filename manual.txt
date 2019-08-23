@@ -15,7 +15,7 @@ Command: perl KDDANet.pl -dr <DRUG_FILE> -di <DISEASE_FILE> -n <NET_FILE> -dt <D
 -o  OUTPUT_DIR for output files (default './result/')
 -gmin  GAMMA_MIN	(default 4)
 -gmax  GAMMA_MAX	(default 12)
--gstep  GAMMA_INCREMENT (default 0.05)
+-gstep  GAMMA_INCREMENT (default 1)
 -opt <CONTEXT> (SDrTDi or SDiTDr, default SDrDTi)
 -h  help
 
