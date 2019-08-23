@@ -1,6 +1,6 @@
 ﻿###################################################################################################################################
-##	pNet: a package for predicting drug-disease associations and the corresponding pharmacological pathways
-##	Wroted by Hua Yu and Lu Lu on 2017-09-01
+##	KDDANet: a package for uncovering hidden gene interactions underlying KDDAs
+##	Wroted by Hua Yu and Lu Lu on 2018-09-01
 ####################################################################################################################################
 
 use strict;
@@ -8,20 +8,18 @@ use Getopt::Long;
 require("lpsolveModeling.pl");
 require("readFile.pl");
 
-## An example for running this software: perl pNet.pl -dr ../Data/DrugBank.Drug.Info.txt -di ../Data/OMIM.Disease.Info.txt -n ../Data/HumanNet.txt -dt ../Data/Used_Drug_Target_Data.txt -dg ../Data/Used_Disease_Gene_Data.txt -o ../Result/ -gmin 4 -gmax 5 -gstep 0.5 -opt SDrTDi
-
-##	get options from command
+####### get options from command line
 my ($drFile,$diFile,$netFile,$dtFile,$dgFile,$ddFile,$outPath,$gammaMin,$gammaMax,$gammaStep,$optimethod,$help);			
 GetOptions(	"drug_info|dr:s" => \$drFile,	##	A tab-delimited file gives drug info (default DrugBank drugs)
 	"disease_info|di:s" => \$diFile,	##	A tab-delimited file gives disease info (default OMIM diseases) 
-	"network_info|n:s" => \$netFile,		##	A tab-delimited file gives gene network info (default HumanNet)
+	"network_info|n:s" => \$netFile,		##	A tab-delimited file gives interactome network info (default HumanNet)
 	"drug_target_info|dt:s" => \$dtFile,	##	A tab-delimited file gives drug target info (default DrugBank targets)
 	"disease_gene_info|dg:s" => \$dgFile,	##	A tab-delimited file gives disease gene info (default OMIM genes)
-    "drug_disease_info|dd:s" => \$ddFile,    ##	A tab-delimited file gives drug-disease associations (default CTD database and literature)
-	"out_path|o:s", => \$outPath,		##	Output path of prediction results (default ./Results/)
+        "drug_disease_info|dd:s" => \$ddFile,    ##	A tab-delimited file gives drug-disease associations (default CTD database and literature)
+	"out_path|o:s", => \$outPath,		##	Output path of prediction results (default ./results/)
 	"gamma_min|gmin:f" => \$gammaMin, 	##	minimum of gamma values (default 4)
-	"gamma_max|gmax:f", => \$gammaMax,	##	maximum of gamma values	(default 20)
-	"gamma_step|gstep:f", => \$gammaStep,	## step increment of gamma (default 0.5)
+	"gamma_max|gmax:f", => \$gammaMax,	##	maximum of gamma values	(default 12)
+	"gamma_step|gstep:f", => \$gammaStep,	## step increment of gamma (default 1)
 	"opti_method|opt:s", => \$optimethod,	## optimization method (SDrTDi or SDiTDr, default Source_Drug_Target_Disease (SDrTDi))
 	"help|h!" => \$help,	## display help info
 ) or usage();
@@ -32,30 +30,29 @@ usage() if(defined $help);
 sub usage {
     print <<"END_USAGE";
 Usage:
-perl pNet.pl -dr <DRUG_FILE> -di <DISEASE_FILE> -n [NETWORK_FILE] -dt [DRUG_TARGET_FILE] -dg [DISEASE_GENE_FILE] -o [OUT_PATH] -gmain [GAMMA_MIN] -gmax [GAMMA_MAX] -gstep [GAMMA_INCREAMENT] -h
+perl KDDANet.pl -dr <DRUG_FILE> -di <DISEASE_FILE> -n [NETWORK_FILE] -dt [DRUG_TARGET_FILE] -dg [DISEASE_GENE_FILE] -o [OUT_PATH] -gmain [GAMMA_MIN] -gmax [GAMMA_MAX] -gstep [GAMMA_INCREAMENT] -h
 -dr  DRUG_FILE for drug info (default DrugBank drugs)
 -di  DISEASE_FILE for disease info (default OMIM diseases)
 -n  NETWORK_FILE for network info (default HumanNet, a functional gene association network '../Data/HumanNet.txt')
 -dt  DRUG_TARGET_FILE for drug target info (default DrugBank targets)
 -dg  DISEASE_GENE_FILE for disease gene info (default OMIM genes)
--dd  DRUG_DISEASE_FILE for drug-disease associations (default CTD database and literature)
--o  OUT_PATH for output files (default '../Result/')
+-dd  DRUG_DISEASE_FILE for drug-disease associations (default drug-disease associations extracted from CTD database)
+-o  OUT_PATH for output files (default '../result/')
 -gmin  MIN_GAMMA for minimum value of gamma (default 4)
--gmax  MAX_GAMMA for maximum value of gamma	(default 10)
--gstep  GAMMA_INCREMENT (default 0.5)
--opt OPTI_METHOD for optimizing drugs or diseases (SDrTDi or SDiTDr, default Source_Drug_Target_Disease (SDrTDi))
+-gmax  MAX_GAMMA for maximum value of gamma (default 10)
+-gstep  GAMMA_INCREMENT (default 1)
+-opt  CONTEXT (SDrTDi or SDiTDr, default Source_Drug_Target_Disease (SDrTDi))
 -h  display help information
-
 END_USAGE
     exit;
 }
 
 if(!defined $netFile){
-	my $netFile = '../Data/HumanNet.txt';
+	my $netFile = '../inputdata/HumanNet.txt';
 }
 
 if(!defined $outPath){
-	my $outPath = '../Result/';
+	my $outPath = '../result/';
 }
 
 if(!defined $gammaMin){
@@ -81,7 +78,7 @@ sub pNet{
 	print "NetFile:\t$netFile\n";
 	print "DrugTargetFile:\t$dtFile\n";
 	print "DiseaseGeneFile:\t$dgFile\n";
-    print "DrugDiseaseFile:\t$ddFile\n";
+        print "DrugDiseaseFile:\t$ddFile\n";
 	print "OutPath:\t$outPath\n";
 	
 	foreach my $gamma (@{$gammas}){
