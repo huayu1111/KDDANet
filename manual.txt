@@ -1,11 +1,13 @@
 * A usage guideline for KDDANet tool
+To run this tool, you need high-performance computing clusters and the Load Sharing Facility (LSF)
 
 1. Installation
-The package can be run after unzipping without installation on either Windows or Linux system as long as Perl has been installed.
+The package can be run after unzipping without installation on Linux system as long as Perl has been installed.
 
 2. Running
-Command: perl KDDANet.pl -dr <DRUG_FILE> -di <DISEASE_FILE> -n <NET_FILE> -dt <DRUG_TARGET_FILE> -dg <DISEASE_GENE_FILE> --dd <DRUG_DISEASE_ASSOCIATION_FILE> -o <OUTPUT_DIR> -gmin <GAMMA_MIN> -gmax <GAMMA_MAX> -gstep GAMA_INCREMENT -opt <CONTEXT> -h
+I) Step 1: Obtaining the solution of minimum cost flow optimization problem for each query drug/disease and multiple its related diseases/drugs
 
+Command: perl KDDANet.pl -dr <DRUG_FILE> -di <DISEASE_FILE> -n <NET_FILE> -dt <DRUG_TARGET_FILE> -dg <DISEASE_GENE_FILE> --dd <DRUG_DISEASE_ASSOCIATION_FILE> -o <OUTPUT_DIR> -gmin <GAMMA_MIN> -gmax <GAMMA_MAX> -gstep GAMA_INCREMENT -opt <CONTEXT> -h
 -dr  <DRUG_FILE>, A single column text file (default DrugBank drugs)
 -di  <DISEASE_FILE>, A single column text file (default OMIM diseases)
 -n  <NET_FILE>, A tab-delimited text file (default HumanNet)
@@ -20,27 +22,44 @@ Command: perl KDDANet.pl -dr <DRUG_FILE> -di <DISEASE_FILE> -n <NET_FILE> -dt <D
 -h  help
 
 3. Input files format
-(1) <DRUG INFO> / <DIS_INFO>
-A tab-delimited text file provides drug or disease information
-Format: DRUG_ID/DIS_ID
+(1) <DRUG FILE> / <DISEASE_FILE>
+A single column text file provides drug or disease information
+Format: DRUG_ID/DISEASE_ID
 
-(2) <NET_INFO>
+(2) <NET_FILE>
 A tab-delimited text file provides interactome network information
-Format: G1 ID G2 ID	Weight
+Format: G1_ID G2_ID	Weight
 
-(3) <DRUG_TAR_INFO> / <DIS_GENE_INFO>
+(3) <DRUG_TARGET_INFO> / <DISEASE_GENE_INFO>
 A tab delimited text file provides drug target information / disease related gene information
-Format: DRUG_ID  TARGET GENE ID / DIS_ID RELATED GENE ID 
+Format: DRUG_ID  TARGET_GENE_ID / DISEASE_ID RELATED_GENE_ID 
 
 (4) <DRUG_DISEASE_ASSOCIATION_FILE>
 A tab delimited text file provides drug-disease association information
-Format: DRUG_ID  DISEASE ID
+Format: DRUG_ID  DISEASE_ID
+
+An example for running this step:
+perl KDDANet.pl -dr ../inputdata/DrugBank.Drug.Info.txt -di ../inputdata/OMIM.Disease.Info.txt -n ../inputdata/HumanNet.txt -dt ../inputdata/Used_Drug_Target_Data.txt -dg ../inputdata/Used_Disease_Gene_Data.txt --dd ../inputdata/kdda_total.txt -o ../result/ -gmin 4 -gmax 4 -gstep 1 -opt SDrTDi
+
+This command will obtain the solutions for each query drug/disease and multiple its related diseases/drugs in the directory ../reslut/$gamma for each gamma value
+
+II) Step2: Extracting hidden gene interaction subnetwork from the solutions
+Command 1: perl getNodeFlowAndEdgeFlow.pl --indir <IN_DIR> --outdir <OUT_DIR>
+--indir <IN_DIR> the directory used to place result files of solutions
+--outdir <OUT_DIR> the directory used to place node flow file and edge flow file
+
+Command 2: perl getGeneInteractSubNetBridgingDrugAndDisease.pl --infile <IN_FILE> --outDir <OUT_DIR>
+--infile <IN_FILE> the edge flow file
+--outDir <OUT_DIR> the directory used to place gene interaction subnetwork for each known drug-disease association
+
+An example for running this step:
+perl getNodeFlowAndEdgeFlowFromSolutions.pl --indir ../results/4 --outdir  ../results/4
+perl getGeneInteractionSubNetForEachKDDA.pl --infile ../results/4/opti_edge_flow.txt --outDir  ../results/4
+
+III) Identifying gene modules from subnetwork using MCL algorithm
 
 4. Input data
 The input data in ./inputdata/ is the data we described in our paper
-
-5. An example for running KDDANet tool:
-perl KDDANet.pl -dr ../inputdata/DrugBank.Drug.Info.txt -di ../inputdata/OMIM.Disease.Info.txt -n ../inputdata/HumanNet.txt -dt ../inputdata/Used_Drug_Target_Data.txt -dg ../inputdata/Used_Disease_Gene_Data.txt --dd ../inputdata/kdda_total.txt -o ../result/ -gmin 4 -gmax 12 -gstep 1 -opt SDrTDi
 
 Reference:
 1. Goh, K.I., et al. (2007) The human disease network, Proc. Natl. Acad. Sci. U. S. A., 104, 8685-8690.
