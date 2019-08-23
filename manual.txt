@@ -4,39 +4,38 @@
 The package can be run after unzipping without installation on either Windows or Linux system as long as Perl has been installed.
 
 2. Running
-Command: perl KDDANet.pl -dr <DRUG_INFO> -di <DIS_INFO> -n <NET_INFO> -dt <DRUG_TAR_INFO> -dg <DIS_GENE_INFO> --dd <DRUG_DIS_ASSO_INFO> -o <OUTPUT_DIR> -gmin <GAMMA_MIN> -gmax <GAMMA_MAX> -gstep GAMA_INCREMENT -opt <CONTEXT> -h
+Command: perl KDDANet.pl -dr <DRUG_INFO> -di <DISEASE_INFO> -n <NET_FILE> -dt <DRUG_TAR_INFO> -dg <DIS_GENE_INFO> --dd <DRUG_DIS_ASSO_INFO> -o <OUTPUT_DIR> -gmin <GAMMA_MIN> -gmax <GAMMA_MAX> -gstep GAMA_INCREMENT -opt <CONTEXT> -h
 
--dr  <DRUG INFO>, A tab-delimited text file (default DrugBank drugs)
--di  <DIS_INFO>, A tab-delimited text file (default OMIM diseases)
+-dr  <DRUG_FILE>, A single column text file (default DrugBank drugs)
+-di  <DIS_INFO>, A single column text file (default OMIM diseases)
 -n  <NET_INFO>, A tab-delimited text file (default HumanNet)
 -dt <DRUG_TAR_INFO> A tab-delimited text file (default DrugBank gene targets)
 -dg <DIS_GENE_INFO> A tab-delimited text file (default disease-related genes extracted from literature [1])
--o  OUTPUT_DIR for output files (default './Result/')
+-o  OUTPUT_DIR for output files (default './result/')
 -gmin  GAMMA_MIN	(default 4)
 -gmax  GAMMA_MAX	(default 12)
 -gstep  GAMMA_INCREMENT (default 0.05)
 -opt <CONTEXT> (SDrTDi or SDiTDr, default SDrDTi)
 -h  help
 
-3. Files format
-(1)FILE_SOURCE/FILE_TARGET
-A tab-delimited text file provides source/target nodes information
-Format: nodeID nodeWeight
-Example:     635	1
-(2)FILE_EDGE
-A tab-delimited text file provides Network information
-Format: From	To	Type	Weight
-Example:     2		5340	->	0.013326773023727	
-"->" for directed edge, "--" for undirected edge
-(3)node.RankByGamma
-Each genes was assigned a minimal parameter γ when it first appears in an optimal subnetwork, together with its node type (V1 for source nodes, V2 for sink nodes and PR for predicted genes connecting the source and sink nodes)
-Format: nodeID nodeMinGamma nodeType (tab-delimited)
-Example:2	6	V1
-(4)subnetwork files
-The package generates a series of subnetworks within the designated value range of parameter γ (between the input min and max values) at the input step value. The output file (.sif) and annotation files (.NODE and .EDGE) can be loaded directly into Cytoscape for network visualization.
+3. Input files format
+(1) <DRUG INFO> / <DIS_INFO>
+A tab-delimited text file provides drug or disease information
+Format: DRUG_ID/DIS_ID
+
+(2) <NET_INFO>
+A tab-delimited text file provides interactome network information
+Format: From	To	Weight
+
+(3) <DRUG_TAR_INFO> / <DIS_GENE_INFO>
+A tab delimited text file provides drug target information / disease related gene information
+Format: DRUG_ID  TARGET GENE ID / DIS_ID RELATED GENE ID 
 
 4. Input data
 The input data in ./inputdata/ is the data we described in our paper
+
+5. An example for running KDDANet tool:
+perl KDDANet.pl -dr ../inputdata/DrugBank.Drug.Info.txt -di ../inputdata/OMIM.Disease.Info.txt -n ../inputdata/HumanNet.txt -dt ../inputdata/Used_Drug_Target_Data.txt -dg ../inputdata/Used_Disease_Gene_Data.txt -o ../result/ -gmin 4 -gmax 12 -gstep 1 -opt SDrTDi
 
 Reference:
 1. Goh, K.I., et al. (2007) The human disease network, Proc. Natl. Acad. Sci. U. S. A., 104, 8685-8690.
