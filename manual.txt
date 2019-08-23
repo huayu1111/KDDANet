@@ -1,5 +1,5 @@
-* A usage guideline for KDDANet tool
-To run this tool, you need high-performance computing clusters and the Load Sharing Facility (LSF)
+
+To run this KDDANet tool, high-performance computing clusters and the Load Sharing Facility (LSF) system is needed
 
 1. Installation
 The package can be run after unzipping without installation on Linux system as long as Perl has been installed.
@@ -54,9 +54,17 @@ Command 2: perl getGeneInteractSubNetBridgingDrugAndDisease.pl --infile <IN_FILE
 
 An example for running this step:
 perl getNodeFlowAndEdgeFlowFromSolutions.pl --indir ../results/4 --outdir  ../results/4
-perl getGeneInteractionSubNetForEachKDDA.pl --infile ../results/4/opti_edge_flow.txt --outDir  ../results/4
+perl getGeneInteractionSubNetForEachKDDA.pl --infile ../results/4/opti_edge_flow.txt --outDir  ../results/4/subnetworks
 
 III) Identifying gene modules from subnetwork using MCL algorithm
+Command:ObtainModuleInfoByMCL.pl --indir <IN_DIR> --outdir <OUT_DIR>
+--indir <IN_DIR> the directory used to place result files of gene interaction subnetworks
+--outdir <OUT_DIR> the directory used to place node module files
+
+An example for running this step:
+perl ObtainModuleInfoByMCL.pl --indir ../results/4/subnetworks --outDir  ../results/4/modules
+
+For downloading and installing MCL software, please see https://micans.org/mcl/
 
 4. Input data
 The input data in ./inputdata/ is the data we described in our paper
