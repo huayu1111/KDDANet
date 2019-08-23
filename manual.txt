@@ -2,17 +2,22 @@
 
 1. Installation
 The package can be run after unzipping without installation on either Windows or Linux system as long as Perl has been installed.
-2. Running
-Command: perl KDDANet.pl -dr A tab-delimited text file gives drug info -di A tab-delimited text file gives disease info -n A tab-delimited text file gives gene interactome network info -dt A tab-delimited txt file gives drug target info -dg  --dd /share/home/zhangjin/project_pharpath/PNet/Data/GSPs_Gastrointestinal.txt -o /share/home/zhangjin/project_pharpath/PNet/Result/SDrTDi/Gastrointestinal_Disease -gmin 7 -gmax 12 -gstep 1 -opt SDrTDi -h
 
--s  FILE_SOURCE for source nodes [required]
--t  FILE_TARGET for target(sink) nodes [required]
--e  FILE_EDGE for network edges (default a weighted human interactome './Data/edges.txt' described in Huang et al. 2011)
--o  DIRECTORY_OUT for output files (default './Result/')
--min  GAMMA_MIN	(default 4)
--max  GAMMA_MAX	(default 10)
--step  GAMMA_INCREMENT (default 0.05)
+2. Running
+Command: perl KDDANet.pl -dr <DRUG_INFO> -di <DIS_INFO> -n <NET_INFO> -dt <DRUG_TAR_INFO> -dg <DIS_GENE_INFO> --dd <DRUG_DIS_ASSO_INFO> -o <OUTPUT_DIR> -gmin <GAMMA_MIN> -gmax <GAMMA_MAX> -gstep GAMA_INCREMENT -opt <CONTEXT> -h
+
+-dr  <DRUG INFO>, A tab-delimited text file (default DrugBank drugs)
+-di  <DIS_INFO>, A tab-delimited text file (default OMIM diseases)
+-n  <NET_INFO>, A tab-delimited text file (default HumanNet)
+-dt <DRUG_TAR_INFO> A tab-delimited text file (default DrugBank gene targets)
+-dg <DIS_GENE_INFO> A tab-delimited text file (default disease-related genes extracted from literature [1])
+-o  OUTPUT_DIR for output files (default './Result/')
+-gmin  GAMMA_MIN	(default 4)
+-gmax  GAMMA_MAX	(default 12)
+-gstep  GAMMA_INCREMENT (default 0.05)
+-opt <CONTEXT> (SDrTDi or SDiTDr, default SDrDTi)
 -h  help
+
 3. Files format
 (1)FILE_SOURCE/FILE_TARGET
 A tab-delimited text file provides source/target nodes information
@@ -29,8 +34,12 @@ Format: nodeID nodeMinGamma nodeType (tab-delimited)
 Example:2	6	V1
 (4)subnetwork files
 The package generates a series of subnetworks within the designated value range of parameter γ (between the input min and max values) at the input step value. The output file (.sif) and annotation files (.NODE and .EDGE) can be loaded directly into Cytoscape for network visualization.
-4. Test dataset
-The test dataset in ./Data/ is the data we described in the paper (with the differentially expressed genes in muscle as sink nodes). 
+
+4. Input data
+The input data in ./inputdata/ is the data we described in our paper
+
+Reference:
+1. Goh, K.I., et al. (2007) The human disease network, Proc. Natl. Acad. Sci. U. S. A., 104, 8685-8690.
 
 For any questions, please contact:
 ----------------------------------
