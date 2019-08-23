@@ -4,13 +4,14 @@
 The package can be run after unzipping without installation on either Windows or Linux system as long as Perl has been installed.
 
 2. Running
-Command: perl KDDANet.pl -dr <DRUG_INFO> -di <DISEASE_INFO> -n <NET_FILE> -dt <DRUG_TAR_INFO> -dg <DIS_GENE_INFO> --dd <DRUG_DIS_ASSO_INFO> -o <OUTPUT_DIR> -gmin <GAMMA_MIN> -gmax <GAMMA_MAX> -gstep GAMA_INCREMENT -opt <CONTEXT> -h
+Command: perl KDDANet.pl -dr <DRUG_FILE> -di <DISEASE_FILE> -n <NET_FILE> -dt <DRUG_TARGET_FILE> -dg <DISEASE_GENE_FILE> --dd <DRUG_DISEASE_ASSOCIATION_FILE> -o <OUTPUT_DIR> -gmin <GAMMA_MIN> -gmax <GAMMA_MAX> -gstep GAMA_INCREMENT -opt <CONTEXT> -h
 
 -dr  <DRUG_FILE>, A single column text file (default DrugBank drugs)
--di  <DIS_INFO>, A single column text file (default OMIM diseases)
--n  <NET_INFO>, A tab-delimited text file (default HumanNet)
--dt <DRUG_TAR_INFO> A tab-delimited text file (default DrugBank gene targets)
--dg <DIS_GENE_INFO> A tab-delimited text file (default disease-related genes extracted from literature [1])
+-di  <DISEASE_FILE>, A single column text file (default OMIM diseases)
+-n  <NET_FILE>, A tab-delimited text file (default HumanNet)
+-dt <DRUG_TARGET_FILE> A tab-delimited text file (default DrugBank gene targets)
+-dg <DISEASE_GENE_FILE> A tab-delimited text file (default disease-related genes extracted from literature [1])
+-dd <DRUG_DISEASE_ASSOCIATION_FILE> A tab-delimited text file (default drug-disease association contained in CTD database)
 -o  OUTPUT_DIR for output files (default './result/')
 -gmin  GAMMA_MIN	(default 4)
 -gmax  GAMMA_MAX	(default 12)
@@ -25,17 +26,21 @@ Format: DRUG_ID/DIS_ID
 
 (2) <NET_INFO>
 A tab-delimited text file provides interactome network information
-Format: From	To	Weight
+Format: G1 ID G2 ID	Weight
 
 (3) <DRUG_TAR_INFO> / <DIS_GENE_INFO>
 A tab delimited text file provides drug target information / disease related gene information
 Format: DRUG_ID  TARGET GENE ID / DIS_ID RELATED GENE ID 
 
+(4) <DRUG_DISEASE_ASSOCIATION_FILE>
+A tab delimited text file provides drug-disease association information
+Format: DRUG_ID  DISEASE ID
+
 4. Input data
 The input data in ./inputdata/ is the data we described in our paper
 
 5. An example for running KDDANet tool:
-perl KDDANet.pl -dr ../inputdata/DrugBank.Drug.Info.txt -di ../inputdata/OMIM.Disease.Info.txt -n ../inputdata/HumanNet.txt -dt ../inputdata/Used_Drug_Target_Data.txt -dg ../inputdata/Used_Disease_Gene_Data.txt -o ../result/ -gmin 4 -gmax 12 -gstep 1 -opt SDrTDi
+perl KDDANet.pl -dr ../inputdata/DrugBank.Drug.Info.txt -di ../inputdata/OMIM.Disease.Info.txt -n ../inputdata/HumanNet.txt -dt ../inputdata/Used_Drug_Target_Data.txt -dg ../inputdata/Used_Disease_Gene_Data.txt --dd ../inputdata/kdda_total.txt -o ../result/ -gmin 4 -gmax 12 -gstep 1 -opt SDrTDi
 
 Reference:
 1. Goh, K.I., et al. (2007) The human disease network, Proc. Natl. Acad. Sci. U. S. A., 104, 8685-8690.
