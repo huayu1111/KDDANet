@@ -1,5 +1,5 @@
 
-To run this KDDANet tool, high-performance computing clusters and the Load Sharing Facility (LSF) system is needed
+To run KDDANet tool, high-performance computing clusters and the Load Sharing Facility (LSF) system is needed
 
 1. Installation
 The package can be run after unzipping without installation on Linux system as long as Perl has been installed.
