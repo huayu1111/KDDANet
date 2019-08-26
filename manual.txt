@@ -41,7 +41,7 @@ Format: DRUG_ID  DISEASE_ID
 An example for running this step:
 perl KDDANet.pl -dr ../inputdata/DrugBank.Drug.Info.txt -di ../inputdata/OMIM.Disease.Info.txt -n ../inputdata/HumanNet.txt -dt ../inputdata/Used_Drug_Target_Data.txt -dg ../inputdata/Used_Disease_Gene_Data.txt --dd ../inputdata/kdda_total.txt -o ../result/ -gmin 4 -gmax 4 -gstep 1 -opt SDrTDi
 
-This command will obtain the solutions for each query drug/disease and multiple its related diseases/drugs in the directory ../reslut/$gamma for each gamma value
+This command will obtain the solutions for each query drug/disease and multiple its related diseases/drugs in the directory of ../reslut/$gamma for each gamma value
 
 II) Step2: Extracting hidden gene interaction subnetwork from the solutions
 Command 1: perl getNodeFlowAndEdgeFlow.pl --indir <IN_DIR> --outdir <OUT_DIR>
