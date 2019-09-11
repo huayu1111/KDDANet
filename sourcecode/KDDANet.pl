@@ -1,5 +1,5 @@
 ﻿###################################################################################################################################
-##	KDDANet: a package for uncovering hidden gene interactions underlying KDDAs
+##	KDDANet: Main function for uncovering hidden gene interactions underlying KDDAs
 ##	Wroted by Hua Yu and Lu Lu on 2018-09-01
 ####################################################################################################################################
 
