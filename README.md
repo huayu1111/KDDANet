@@ -5,10 +5,10 @@ A computational framework for uncovering hidden gene interactions underlying Kno
 1.0.0
 
 # Author
-Hua Yu
+Hua Yu and Lu Lu
 
 # Description
-This software identifies the hidden gene interactions and modules through implementing minimum cost optimization and graph clustering on a unified flow network model
+This software identifies the hidden gene interactions and modules underlying KDDAs through implementing minimum cost optimization and graph clustering on a unified flow network model
 
 # Documentation
 To use KDDANet, please refer to the instructions in manual.txt in this subdirectory
