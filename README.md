@@ -1,5 +1,5 @@
 # KDDANet
-A computational framework for uncovering hidden gene interactions underlying Known Drug-Disease Associations (KDDAs)
+A computational framework for uncovering molecular roadmap mediating Known Drug-Disease Associations (KDDAs)
 
 # Version
 1.0.0
@@ -8,7 +8,7 @@ A computational framework for uncovering hidden gene interactions underlying Kno
 Hua Yu and Lu Lu
 
 # Description
-This software identifies the hidden gene interactions and modules underlying KDDAs through implementing minimum cost optimization and graph clustering on a unified flow network model
+This software identifies the gene interactions and modules mediating KDDAs through implementing minimum cost optimization, depth-first searching and graph clustering on a unified flow network model
 
 # Documentation
 To use KDDANet, please refer to the instructions in manual.txt in this subdirectory
