@@ -21,7 +21,7 @@ Command: perl getSolution.pl -dr <DRUG_FILE> -di <DISEASE_FILE> -n <NET_FILE> -d
 -opt <CONTEXT> (SDrTDi or SDiTDr, default SDrDTi)
 -h  help
 
-Input files format
+Input files format:
 (1) <DRUG FILE> / <DISEASE_FILE>
 A single column text file provides drug or disease information
 Format: DRUG_ID/DISEASE_ID
