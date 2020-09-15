@@ -115,7 +115,7 @@ sub LPModeler{
 	readNodeFile($diFile,\%diHash);
 	readEdgeFile($dtFile,\%dtHash);
 	readEdgeFile($dgFile,\%dgHash);
-    readEdgeFile($ddFile,\%ddHash);
+        readEdgeFile($ddFile,\%ddHash);
 	print "pNet optimization (gamma=$gamma) ...\n";
 	if($optimethod eq "SDrTDi"){
 		foreach my $drug (keys %drHash){
