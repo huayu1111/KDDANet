@@ -1,6 +1,7 @@
 1. Installation
 KDDANet can be installed as follows:
 I) Add KDDANet to PATH variable
+git clone https://github.com/huayu1111/KDDANet.git
 export PATH=path_to_KDDANet:$PATH
 cd path_to_KDDANet
 chmod +x lpsolver
@@ -14,7 +15,6 @@ export PATH=$HOME/local/bin:$PATH
 
 2. Running
 I) Step 1: Obtaining the solution of minimum cost flow optimization problem for each query drug (disease) and its related diseases (drugs)
-
 Command: perl getSolution.pl -dr <DRUG_FILE> -di <DISEASE_FILE> -n <NET_FILE> -dt <DRUG_TARGET_FILE> -dg <DISEASE_GENE_FILE> --dd <DRUG_DISEASE_ASSOCIATION_FILE> -o <OUTPUT_DIR> -gmin <GAMMA_MIN> -gmax <GAMMA_MAX> -gstep GAMA_INCREMENT -opt <CONTEXT> -h
 -dr  <DRUG_FILE>, A single column text file (default DrugBank drugs)
 -di  <DISEASE_FILE>, A single column text file (default OMIM diseases)
@@ -48,7 +48,6 @@ Format: DRUG_ID  DISEASE_ID
 
 An example for running this step:
 perl getSolution.pl -dr ../inputdata/DrugBank.Drug.Info.txt -di ../inputdata/OMIM.Disease.Info.txt -n ../inputdata/HumanNet.txt -dt ../inputdata/Used_Drug_Target_Data.txt -dg ../inputdata/Used_Disease_Gene_Data.txt --dd ../inputdata/KDDAs_Total.txt -o ../result/ -gmin 4 -gmax 4 -gstep 1 -opt SDrTDi
-
 This command will obtain the solution for each query drug/disease and its related diseases/drugs in the directory of ../result/$gamma for each gamma value
 
 II) Step2: Extracting roadmap of genes mediating individual KDDA from the solution using depth-first searching
