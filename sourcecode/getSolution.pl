@@ -10,7 +10,8 @@ require("readFile.pl");
 
 ####### get options from command line
 my ($drFile,$diFile,$netFile,$dtFile,$dgFile,$ddFile,$outPath,$gammaMin,$gammaMax,$gammaStep,$optimethod,$help);			
-GetOptions(	"drug_info|dr:s" => \$drFile,	##	A tab-delimited file gives drug info (default DrugBank drugs)
+GetOptions(	
+        "drug_info|dr:s" => \$drFile,	##	A tab-delimited file gives drug info (default DrugBank drugs)
 	"disease_info|di:s" => \$diFile,	##	A tab-delimited file gives disease info (default OMIM diseases) 
 	"network_info|n:s" => \$netFile,		##	A tab-delimited file gives interactome network info (default HumanNet)
 	"drug_target_info|dt:s" => \$dtFile,	##	A tab-delimited file gives drug target info (default DrugBank targets)
@@ -60,7 +61,7 @@ if(!defined $gammaMin){
 }
 
 if(!defined $gammaMax){
-	my $gammaMax = 20;
+	my $gammaMax = 12;
 } 	
 if(!defined $optimethod){
 	my $optimethod = "SDrTDi";
