@@ -1,7 +1,7 @@
 #!/usr/bin/perl -w
 ##########################################################################################################################
 #	File Name: getGeneInteractSubNetForEachKDDAUsingDFS.pl
-#	This program gets the gene interaction subnetwork bridging drugs and diseases
+#	This program gets the gene interaction subnetwork for each KDDA using depth-first searching
 # 	Wroted By Lu Lu and Hua Yu
 ##########################################################################################################################
 
