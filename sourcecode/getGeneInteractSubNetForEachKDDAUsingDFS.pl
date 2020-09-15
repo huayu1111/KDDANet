@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 ##########################################################################################################################
-#	File Name: getGeneInteractSubNetBridgingDrugAndDisease.pl
+#	File Name: getGeneInteractSubNetForEachKDDAUsingDFS.pl
 #	This program gets the gene interaction subnetwork bridging drugs and diseases
 # 	Wroted By Lu Lu and Hua Yu
 ##########################################################################################################################
@@ -37,14 +37,14 @@ foreach my $drugid (keys %edgeFlows){
         foreach my $firstgene (@firstgenes){
             my @secondgenes = keys %{$edgeFlows{$drugid}{$firstgene}};
             foreach my $secondgene (@secondgenes){
-				if($secondgene ne $drugid){
-					$subnet{$firstgene}{$secondgene} = $edgeFlows{$drugid}{$firstgene}{$secondgene};
-					$markHash{$firstgene}{$secondgene} = 1;
-					$markHash{$secondgene}{$firstgene} = 1;
-					getPaths($drugid,$secondgene,\%subnet,\%edgeFlows,\%markHash,\%diss);
-				}
+			if($secondgene ne $drugid){
+				$subnet{$firstgene}{$secondgene} = $edgeFlows{$drugid}{$firstgene}{$secondgene};
+				$markHash{$firstgene}{$secondgene} = 1;
+				$markHash{$secondgene}{$firstgene} = 1;
+				getPaths($drugid,$secondgene,\%subnet,\%edgeFlows,\%markHash,\%diss);
 			}
 		}
+	}
         open(OUT,">$outdir/$drugid\_$dis\_subnet.txt") or die "$!\n";
         foreach my $from (keys %subnet){
             foreach my $to (keys %{$subnet{$from}}){
@@ -57,14 +57,14 @@ foreach my $drugid (keys %edgeFlows){
 
 sub getPaths{
 	my ($drugid,$to,$subnet,$edgeFlows,$markHash,$diss) = @_;
-    my $from = $to;
-    my @tos = keys %{$edgeFlows -> {$drugid}{$from}};
-    foreach my $to (@tos){
-        next if($to eq $drugid);
-        next if(exists $diss -> {$to});
-        if(!exists $markHash -> {$from}{$to}){
-            $subnet -> {$from}{$to} = $edgeFlows{$drugid}{$from}{$to};
-            getPaths($drugid,$to,$subnet,$edgeFlows,$markHash,$diss);
+	my $from = $to;
+	my @tos = keys %{$edgeFlows -> {$drugid}{$from}};
+	foreach my $to (@tos){
+            next if($to eq $drugid);
+            next if(exists $diss -> {$to});
+            if(!exists $markHash -> {$from}{$to}){
+                $subnet -> {$from}{$to} = $edgeFlows{$drugid}{$from}{$to};
+                getPaths($drugid,$to,$subnet,$edgeFlows,$markHash,$diss);
         }
     }
 }
