@@ -37,13 +37,13 @@ foreach my $drugid (keys %edgeFlows){
         foreach my $firstgene (@firstgenes){
             my @secondgenes = keys %{$edgeFlows{$drugid}{$firstgene}};
             foreach my $secondgene (@secondgenes){
-			if($secondgene ne $drugid){
-				$subnet{$firstgene}{$secondgene} = $edgeFlows{$drugid}{$firstgene}{$secondgene};
-				$markHash{$firstgene}{$secondgene} = 1;
-				$markHash{$secondgene}{$firstgene} = 1;
-				getPaths($drugid,$secondgene,\%subnet,\%edgeFlows,\%markHash,\%diss);
-			}
+		if($secondgene ne $drugid){
+			$subnet{$firstgene}{$secondgene} = $edgeFlows{$drugid}{$firstgene}{$secondgene};
+			$markHash{$firstgene}{$secondgene} = 1;
+			$markHash{$secondgene}{$firstgene} = 1;
+			getPaths($drugid,$secondgene,\%subnet,\%edgeFlows,\%markHash,\%diss);
 		}
+            }
 	}
         open(OUT,">$outdir/$drugid\_$dis\_subnet.txt") or die "$!\n";
         foreach my $from (keys %subnet){
