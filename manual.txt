@@ -74,7 +74,7 @@ perl ObtainModuleInfoByMCL.pl --indir ../results/4/subnetworks --outDir  ../resu
 
 For downloading and installing MCL software, please see https://micans.org/mcl/
 
-4. Input data
+3. Input data
 The directory of ./inputdata/ provides the datasets used in our paper
 
 For any questions, please contact:
