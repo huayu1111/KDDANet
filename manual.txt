@@ -54,7 +54,7 @@ Command 2: perl getGeneInteractionSubNetForEachKDDAUsingDFS.pl --infile <IN_FILE
 
 An example for running this step:
 perl getNodeFlowAndEdgeFlowFromSolutions.pl --indir ../results/4 --outdir  ../results/4
-perl getGeneInteractionSubNetForEachKDDA.pl --infile ../results/4/opti_edge_flow.txt --outDir  ../results/4/subnetworks
+perl getGeneInteractionSubNetForEachKDDAUsingDFS.pl.pl --infile ../results/4/opti_edge_flow.txt --outDir  ../results/4/subnetworks
 
 III) Identifying gene modules from subnetwork using MCL algorithm
 Command:ObtainModuleInfoByMCL.pl --indir <IN_DIR> --outdir <OUT_DIR>
