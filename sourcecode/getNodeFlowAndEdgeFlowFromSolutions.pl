@@ -16,7 +16,7 @@ foreach my $resfile (@resFiles){
 	chomp $resfile;
 	$resfile =~ /prim\.simp\.result\.(DB.*)\.\d+\.txt/;
 	my $drugid = $1;
-    getEdgeFlow($resfile,$drugid,\%flowEdges,\%newEdges);
+        getEdgeFlow($resfile,$drugid,\%flowEdges,\%newEdges);
 }
 
 open(OUT,">$outdir/opti_edge_flow.txt") or die "$!\n";
