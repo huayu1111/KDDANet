@@ -18,4 +18,3 @@ foreach my $subnetfile (@subnetfiles){
     $outfile =~ s/subnet/module/;
 	system("mcl $subnetfile --abc -o $outdir/$outfile")
 }
-}
