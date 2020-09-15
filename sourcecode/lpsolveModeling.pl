@@ -1,12 +1,12 @@
 ﻿#######################################################################################################################################
 ##  Linear Programming Model (LPM) to solve minimum cost flow optimization problem 
-##	Wroted by Hua Yu and Lu Lu on 2018-08-09
+##  Wroted by Hua Yu and Lu Lu on 2018-08-09
 #######################################################################################################################################
 
 sub lpsolveModeling{
 	my ($source,$sourceHash,$targetHash,$sourcemapHash,$targetmapHash,$ddHash,$netFile,$outDir,$gamma,$optimethod) = @_;
-    print "$outDir\n";
-	##	Read network file
+        print "$outDir\n";
+	## Read network file
 	my %net = ();
 	readEdgeFile($netFile,\%net);
 	open(ERROR,">>$outDir/error.log") or die "$!\n";
@@ -418,7 +418,7 @@ sub LPSolver{
 	my ($outDir,$gamma,$source) = @_;
 	if(!-e "$outDir/prim.simp.result.$source.$gamma.txt" || -z "$outDir/prim.simp.result.$source.$gamma.txt"){
 		my @commands = ();
-		$commands[0] = join(' ', '/public/ZhangJinLab/project_pharpath/PNet/Proc/lpsolver','-lp',"$outDir/model.$source.$gamma.lp",'-prim','>',"$outDir/prim.simp.result.$source.$gamma.txt");
+		$commands[0] = join(' ', 'lpsolver','-lp',"$outDir/model.$source.$gamma.lp",'-prim','>',"$outDir/prim.simp.result.$source.$gamma.txt");
 		$commands[1] = join(' ','rm -rf',"$outDir/model.$source.$gamma.lp");
 		my $commands = join("\n",@commands)."\n";  
 		# open(LSF,">$outDir/lpsolver_".$source."_".$gamma.".lsf") or die "$!\n";
@@ -435,31 +435,31 @@ sub LPSolver{
 # END
 		# close LSF;
 		
-        # my $taskNum =`bjobs | grep RUN | grep normal | grep lpsolver | wc -l`; 
+		# my $taskNum =`bjobs | grep RUN | grep normal | grep lpsolver | wc -l`; 
 		# while($taskNum > 100){
 			# print "The num of task remaining $taskNum\n";
 			# sleep 30;
 			# print `date`;
 			# $taskNum = `bjobs | grep RUN | grep normal | grep lpsolver | wc -l`;
 		# }
-        # my $bsub = `bsub < $outDir/lpsolver_$source\_$gamma.lsf`;
-        # if($bsub ne ""){
-            # print "$bsub\n";
-        # }
-        open(SH,">$outDir/lpsolver_".$source."_".$gamma.".sh") or die "$!\n";
-        print SH $commands;
-        close SH;
-        my $taskNum = `ps -aux | grep lpsolver | wc -l`;
-        while($taskNum > 200){
+		# my $bsub = `bsub < $outDir/lpsolver_$source\_$gamma.lsf`;
+		# if($bsub ne ""){
+		    # print "$bsub\n";
+		# }
+		open(SH,">$outDir/lpsolver_".$source."_".$gamma.".sh") or die "$!\n";
+		print SH $commands;
+		close SH;
+		my $taskNum = `ps -aux | grep lpsolver | wc -l`;
+		while($taskNum > 200){
 			print "The num of task remaining $taskNum\n";
 			sleep 30;
 			print `date`;
 			$taskNum = `ps -aux | grep lpsolver | wc -l`;
 		}
-        my $out = system("sh $outDir/lpsolver_$source\_$gamma.sh 1>>$outDir/lpsolver_$source\_$gamma.log 2>>$outDir/lpsolver_$source\_$gamma.err &");
-        if($out==0){
-            print "The task of $sample_id is successfully submitted\n";
-        }
+		my $out = system("sh $outDir/lpsolver_$source\_$gamma.sh 1>>$outDir/lpsolver_$source\_$gamma.log 2>>$outDir/lpsolver_$source\_$gamma.err &");
+		if($out==0){
+		    print "The task of $sample_id is successfully submitted\n";
+		}
 	}
 }
 
