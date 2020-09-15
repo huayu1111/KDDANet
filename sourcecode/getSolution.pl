@@ -1,5 +1,5 @@
 ﻿###################################################################################################################################
-##	KDDANet: Main function for uncovering hidden gene interactions underlying KDDAs
+##	KDDANet: Main function for uncovering roadmap of gene interactions mediating KDDAs
 ##	Wroted by Hua Yu and Lu Lu on 2018-09-01
 ####################################################################################################################################
 
