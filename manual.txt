@@ -1,8 +1,17 @@
-
 To run KDDANet tool, high-performance computing clusters and the Load Sharing Facility (LSF) system is needed.
 
 1. Installation
-The package can be run after unzipping without installation on Linux system as long as Perl has been installed.
+KDDANet can be installed as follows:
+I) Extract KDDANet software and add it to PATH variable using the follow commands:
+unzip KDDANet.zip
+export PATH=path_to_KDDANet:$PATH
+
+II) Downloading MCL software (Version mcl-12-068) from https://micans.org/mcl/, and install it using the follow commands:
+tar xzf mcl-12-068.tar.gz
+cd mcl-12-068
+./configure --prefix=$HOME/local
+make install
+export PATH=path_to_MCL:$PATH
 
 2. Running
 I) Step 1: Obtaining the solution of minimum cost flow optimization problem for each query drug (disease) and its related diseases (drugs)
