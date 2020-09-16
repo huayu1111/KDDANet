@@ -27,6 +27,45 @@ cd mcl-14-137
 make install
 export PATH=$HOME/local/bin:$PATH
 ```
+# Running
+* I) Step 1: Obtaining the solution of minimum cost flow optimization problem for each query drug (disease) and its related diseases (drugs)
+```Bash
+Command: perl getSolution.pl -dr <DRUG_FILE> -di <DISEASE_FILE> -n <NET_FILE> -dt <DRUG_TARGET_FILE> -dg <DISEASE_GENE_FILE> --dd <DRUG_DISEASE_ASSOCIATION_FILE> -o <OUTPUT_DIR> -gmin <GAMMA_MIN> -gmax <GAMMA_MAX> -gstep GAMA_INCREMENT -opt <CONTEXT> -h
+-dr  <DRUG_FILE>, A single column text file (default DrugBank drugs)
+-di  <DISEASE_FILE>, A single column text file (default OMIM diseases)
+-n  <NET_FILE>, A tab-delimited text file (default HumanNet)
+-dt <DRUG_TARGET_FILE> A tab-delimited text file (default DrugBank gene targets)
+-dg <DISEASE_GENE_FILE> A tab-delimited text file (default disease-related genes extracted from literature [1])
+-dd <DRUG_DISEASE_ASSOCIATION_FILE> A tab-delimited text file (default drug-disease association contained in CTD database)
+-o  OUTPUT_DIR for output files (default './result/')
+-gmin  GAMMA_MIN	(default 4)
+-gmax  GAMMA_MAX	(default 12)
+-gstep  GAMMA_INCREMENT (default 1)
+-opt <CONTEXT> (SDrTDi or SDiTDr, default SDrDTi)
+-h  help
+```
+Input files format:
+*   (1) <DRUG FILE> / <DISEASE_FILE>
+A single column text file provides drug or disease information
+Format: DRUG_ID/DISEASE_ID
+
+*   (2) <NET_FILE>
+A tab-delimited text file provides interactome network information
+Format: G1_ID G2_ID	Weight
+
+*   (3) <DRUG_TARGET_INFO> / <DISEASE_GENE_INFO>
+A tab delimited text file provides drug's target information / disease-related gene information
+Format: DRUG_ID  TARGET_GENE_ID / DISEASE_ID RELATED_GENE_ID 
+
+*   (4) <DRUG_DISEASE_ASSOCIATION_FILE>
+A tab delimited text file provides drug-disease association information
+Format: DRUG_ID  DISEASE_ID
+
+An example for running this step:
+```Bash
+perl getSolution.pl -dr ../inputdata/DrugBank.Drug.Info.txt -di ../inputdata/OMIM.Disease.Info.txt -n ../inputdata/HumanNet.txt -dt ../inputdata/Used_Drug_Target_Data.txt -dg ../inputdata/Used_Disease_Gene_Data.txt --dd ../inputdata/KDDAs_Total.txt -o ../result/ -gmin 4 -gmax 4 -gstep 1 -opt SDrTDi
+```
+This command will obtain the solution for each query drug/disease and its related diseases/drugs in the directory of ../result/$gamma for each gamma value
 # License
 KDDANet is licensed under the GPL version 3 or any later version
 
