@@ -82,7 +82,7 @@ An example for running this step:
 perl getNodeFlowAndEdgeFlowFromSolutions.pl --indir ../results/4 --outdir  ../results/4
 perl getGeneInteractionSubNetForEachKDDAUsingDFS.pl.pl --infile ../results/4/opti_edge_flow.txt --outDir  ../results/4/subnetworks
 ```
-* III)  Step3:Identifying gene modules from subnetwork using MCL algorithm
+* III)  Step3: Identifying gene modules from subnetwork using MCL algorithm
 ```Bash
 Command:ObtainModuleInfoByMCL.pl --indir <IN_DIR> --outdir <OUT_DIR>
 --indir <IN_DIR> the directory used to place result files of gene interaction subnetworks
