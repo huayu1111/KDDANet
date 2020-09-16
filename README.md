@@ -71,7 +71,7 @@ perl getNodeFlowAndEdgeFlow.pl --indir <IN_DIR> --outdir <OUT_DIR>
 --indir <IN_DIR> the directory used to place result files of solutions
 --outdir <OUT_DIR> the directory used to place node flow file and edge flow file
 ```
-Or:
+And:
 ```Bash
  perl getGeneInteractionSubNetForEachKDDAUsingDFS.pl --infile <IN_FILE> --outDir <OUT_DIR>
 --infile <IN_FILE> the edge flow file
