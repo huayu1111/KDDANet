@@ -8,7 +8,7 @@ A computational framework for uncovering hidden genes of cellular pathways media
 Hua Yu and Lu Lu
 
 # Description
-This software identifies hidden genes and modules mediating KDDAs through implementing minimum cost optimization, combined with depth-first searching and graph clustering on a unified flow network model
+This software enables genome-wide discovery of hidden genes and modules mediating KDDAs through implementing minimum cost optimization, combined with depth-first searching and graph clustering on a unified flow network model
 
 # Installation
 KDDANet can be installed as follows:<br>
