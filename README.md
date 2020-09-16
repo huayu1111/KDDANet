@@ -65,7 +65,7 @@ An example for running this step:
 perl getSolution.pl -dr ../inputdata/DrugBank.Drug.Info.txt -di ../inputdata/OMIM.Disease.Info.txt -n ../inputdata/HumanNet.txt -dt ../inputdata/Used_Drug_Target_Data.txt -dg ../inputdata/Used_Disease_Gene_Data.txt --dd ../inputdata/KDDAs_Total.txt -o ../result/ -gmin 4 -gmax 4 -gstep 1 -opt SDrTDi
 ```
 This command will obtain the solution for each query drug/disease and its related diseases/drugs in the directory of ../result/$gamma for each gamma value
-* II) Step2: Extracting roadmap of genes mediating individual KDDA from the solution using depth-first searching<br>
+* II) Step2: Extracting the subnetwork of genes mediating individual KDDA from the solution using depth-first searching<br>
 ```Bash
 perl getNodeFlowAndEdgeFlow.pl --indir <IN_DIR> --outdir <OUT_DIR>
 --indir <IN_DIR> the directory used to place result files of solutions
@@ -81,10 +81,10 @@ An example for running this step:
 perl getNodeFlowAndEdgeFlowFromSolutions.pl --indir ../results/4 --outdir  ../results/4
 perl getGeneInteractionSubNetForEachKDDAUsingDFS.pl.pl --infile ../results/4/opti_edge_flow.txt --outDir  ../results/4/subnetworks
 ```
-* III)  Step3: Identifying gene modules from subnetwork using MCL algorithm
+* III)  Step3: Identifying gene modules from the subnetwork using MCL algorithm
 ```Bash
 perl ObtainModuleInfoByMCL.pl --indir <IN_DIR> --outdir <OUT_DIR>
---indir <IN_DIR> the directory used to place result files of gene interaction subnetworks
+--indir <IN_DIR> the directory used to place result files of gene subnetworks
 --outdir <OUT_DIR> the directory used to place gene module files
 ```
 An example for running this step:
