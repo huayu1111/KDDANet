@@ -71,8 +71,6 @@ Command:ObtainModuleInfoByMCL.pl --indir <IN_DIR> --outdir <OUT_DIR>
 An example for running this step:
 perl ObtainModuleInfoByMCL.pl --indir ../results/4/subnetworks --outDir  ../results/4/modules
 
-For downloading and installing MCL software, please see https://micans.org/mcl/
-
 3. Input data
 The directory of ./inputdata/ provides the datasets used in our paper
 
