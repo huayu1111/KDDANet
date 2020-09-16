@@ -83,7 +83,7 @@ perl getGeneInteractionSubNetForEachKDDAUsingDFS.pl.pl --infile ../results/4/opt
 ```
 * III)  Step3: Identifying gene modules from subnetwork using MCL algorithm
 ```Bash
-Command:ObtainModuleInfoByMCL.pl --indir <IN_DIR> --outdir <OUT_DIR>
+perl ObtainModuleInfoByMCL.pl --indir <IN_DIR> --outdir <OUT_DIR>
 --indir <IN_DIR> the directory used to place result files of gene interaction subnetworks
 --outdir <OUT_DIR> the directory used to place gene module files
 ```
