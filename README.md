@@ -11,9 +11,9 @@ Hua Yu and Lu Lu
 This software identifies hidden gene interactions and modules mediating KDDAs through implementing minimum cost optimization, combined with depth-first searching and graph clustering on a unified flow network model
 
 # Installation
-KDDANet can be installed as follows:
-I) Add KDDANet to PATH variable
-···
+KDDANet can be installed as follows:<br>
+* I) Add KDDANet to PATH variable
+···Bash
 git clone https://github.com/huayu1111/KDDANet.git
 export PATH=path_to_KDDANet:$PATH
 cd path_to_KDDANet
