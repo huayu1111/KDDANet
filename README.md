@@ -19,6 +19,14 @@ export PATH=path_to_KDDANet:$PATH
 cd path_to_KDDANet
 chmod +x lpsolver
 ```
+* II) Download MCL software (Version 'mcl-14-137') from https://micans.org/mcl/ and install:
+```Bash
+tar xzf mcl-14-137.tar.gz
+cd mcl-14-137
+./configure --prefix=$HOME/local
+make install
+export PATH=$HOME/local/bin:$PATH
+```
 # License
 KDDANet is licensed under the GPL version 3 or any later version
 
