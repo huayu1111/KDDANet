@@ -1,5 +1,5 @@
 # KDDANet
-A computational framework for uncovering hidden genes mediating Known Drug-Disease Associations (KDDAs)
+A computational framework for uncovering hidden genes of cellular pathways mediating Known Drug-Disease Associations (KDDAs)
 
 # Version
 1.0.0
