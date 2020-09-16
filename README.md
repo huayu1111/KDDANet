@@ -1,5 +1,5 @@
 # KDDANet
-A computational framework for uncovering molecular roadmap mediating Known Drug-Disease Associations (KDDAs)
+A computational framework for uncovering hidden genes mediating Known Drug-Disease Associations (KDDAs)
 
 # Version
 1.0.0
@@ -8,7 +8,7 @@ A computational framework for uncovering molecular roadmap mediating Known Drug-
 Hua Yu and Lu Lu
 
 # Description
-This software identifies hidden gene interactions and modules mediating KDDAs through implementing minimum cost optimization, combined with depth-first searching and graph clustering on a unified flow network model
+This software identifies hidden genes and modules mediating KDDAs through implementing minimum cost optimization, combined with depth-first searching and graph clustering on a unified flow network model
 
 # Installation
 KDDANet can be installed as follows:<br>
@@ -71,7 +71,6 @@ perl getNodeFlowAndEdgeFlow.pl --indir <IN_DIR> --outdir <OUT_DIR>
 --indir <IN_DIR> the directory used to place result files of solutions
 --outdir <OUT_DIR> the directory used to place node flow file and edge flow file
 ```
-And:
 ```Bash
  perl getGeneInteractionSubNetForEachKDDAUsingDFS.pl --infile <IN_FILE> --outDir <OUT_DIR>
 --infile <IN_FILE> the edge flow file
