@@ -13,12 +13,12 @@ This software identifies hidden gene interactions and modules mediating KDDAs th
 # Installation
 KDDANet can be installed as follows:<br>
 * I) Add KDDANet to PATH variable
-···Bash
+```Bash
 git clone https://github.com/huayu1111/KDDANet.git
 export PATH=path_to_KDDANet:$PATH
 cd path_to_KDDANet
 chmod +x lpsolver
-···
+```
 # License
 KDDANet is licensed under the GPL version 3 or any later version
 
