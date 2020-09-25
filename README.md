@@ -1,5 +1,5 @@
 # KDDANet
-A computational framework for uncovering hidden genes of cellular pathways mediating Known Drug-Disease Associations (KDDAs)
+A computational framework for uncovering hidden genes mediating Known Drug-Disease Associations (KDDAs)
 
 # Version
 1.0.0
@@ -11,7 +11,7 @@ Hua Yu and Lu Lu
 This software enables genome-wide discovery of hidden genes and modules mediating KDDAs through implementing minimum cost optimization, combined with depth-first searching and graph clustering on a unified flow network model
 
 # Installation
-KDDANet can be installed as follows:<br>
+KDDANet can be installed as follow:<br>
 * I) Add KDDANet to PATH variable
 ```Bash
 git clone https://github.com/huayu1111/KDDANet.git
@@ -28,7 +28,7 @@ make install
 export PATH=$HOME/local/bin:$PATH
 ```
 # Running
-* I) Step 1: Obtaining the solution of minimum cost flow optimization problem for each query drug (disease) and its related diseases (drugs)
+* I) Step 1: Obtaining the solution of minimum cost flow optimization problem for each query drug (disease) and all its related diseases (drugs)
 ```Bash
 perl getSolution.pl -dr <DRUG_FILE> -di <DISEASE_FILE> -n <NET_FILE> -dt <DRUG_TARGET_FILE> -dg <DISEASE_GENE_FILE> --dd <DRUG_DISEASE_ASSOCIATION_FILE> -o <OUTPUT_DIR> -gmin <GAMMA_MIN> -gmax <GAMMA_MAX> -gstep GAMA_INCREMENT -opt <CONTEXT> -h
 -dr  <DRUG_FILE>, A single column text file (default DrugBank drugs)
