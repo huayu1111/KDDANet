@@ -8,7 +8,7 @@ A computational framework for uncovering hidden genes mediating Known Drug-Disea
 Hua Yu and Lu Lu
 
 # Description
-This software enables genome-wide discovery of hidden genes and modules mediating KDDAs through implementing minimum cost optimization, combined with depth-first searching and graph clustering on a unified flow network model
+This software enables genome-wide discovery of hidden genes and modules mediating KDDAs through implementing minimum cost flow optimization, combined with depth-first searching and graph clustering on a unified flow network model
 
 # Installation
 KDDANet can be installed as follow:<br>
